@@ -1,0 +1,78 @@
+<div class="card" *ngIf="flagLogin==='login'">
+    <div class="p-grid">
+        <div class="p-lg-6 p-md-12 p-sm-12 p-d-flex p-ai-center p-jc-center">
+            <div class="p-text-center">
+                <h3>{{system?.name}}</h3>
+                <h2>{{system?.acronym}}</h2>
+                <hr>
+                <img src="assets/layout/images/login/login.png" alt="mirage-layout"/>
+            </div>
+        </div>
+        <div class="p-lg-2 p-md-12 p-sm-12">
+            <p-divider layout="vertical"></p-divider>
+        </div>
+        <div class="p-lg-4 p-md-12 p-sm-12 p-d-flex p-ai-center p-jc-center">
+            <div class="p-fluid" style="width: 100%;">
+                <form [formGroup]="formLogin" (ngSubmit)="onSubmitLogin($event)">
+                    <div class="p-field">
+                        <label for="username">Usuario:</label>
+                        <input id="username" name="username" pInputText formControlName="username"
+                               placeholder="Cédula o RUC Ej. 0504172422" maxlength="13"/>
+                        <div *ngIf="usernameField.errors && usernameField.touched">
+                            <small *ngIf="usernameField.hasError('required')"
+                                   id="username-help-1" class="p-error">
+                                El campo es obligatorio.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="p-field">
+                        <label for="password">Contraseña:</label>
+                        <p-password id="password" name="password" formControlName="password"
+                                    [feedback]="false" class="p-ml-2"
+                                    [toggleMask]="true">
+                        </p-password>
+                        <div *ngIf="passwordField.errors && passwordField.touched">
+                            <small *ngIf="passwordField.hasError('required')"
+                                   id="password-help-1" class="p-error">
+                                El campo es obligatorio.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="p-field">
+                        <p-checkbox formControlName="keep_session" [binary]="true"
+                                    label="Mantener sesión activa"></p-checkbox>
+                    </div>
+                    <div class="p-field">
+                        <button name="login" type="submit" pButton label="Continuar"
+                                icon="pi pi-arrow-right"></button>
+                    </div>
+                    <div class="p-field">
+                        <button name="login" type="button" pButton label="Iniciar sesión con Google"
+                                class="p-button-info" icon="pi pi-google"
+                        (click)="loginGoogle()"></button>
+                    </div>
+                    <div class="p-field">
+                        <button pButton [routerLink]="['/auth/user-unlocked-user']" label="Desbloquear Usuario"
+                                icon="pi pi-unlock"
+                                class="p-button-text p-ml-2" pTooltip="Haga click para desbloquear su usuario">
+                        </button>
+                    </div>
+                    <div class="p-field">
+                        <button pButton [routerLink]="['/auth/password-forgot']" label="¿Olvidó su contraseña?"
+                                icon="pi pi-key"
+                                class="p-button-text p-ml-2" pTooltip="Haga click si olvidó su contraseña">
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Seleccionar Institutcion -->
+<app-select-institution-role (flagLogin)="flagLogin=$event"
+                             *ngIf="flagLogin==='selectInstitutionRole'"></app-select-institution-role>
+
+<!-- Formulario cambiar contraseña -->
+<app-change-password (flagLogin)="flagLogin=$event" [passwordOld]="passwordField.value"
+                     *ngIf="flagLogin==='changePassword'"></app-change-password>
