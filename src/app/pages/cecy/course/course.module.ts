@@ -35,6 +35,7 @@ import { CourseComponent } from './course.component';
 import { AprovalComponent } from './aproval/aproval.component';
 import { AprovalFormComponent } from './aproval/aproval-form/aproval-form.component';
 import { AprovalListComponent } from './aproval/aproval-list/aproval-list.component';
+import { AssignalComponent } from './assignal/assignal.component';
 
 
 
@@ -77,6 +78,7 @@ import { AprovalListComponent } from './aproval/aproval-list/aproval-list.compon
         AprovalComponent,
         AprovalFormComponent,
         AprovalListComponent,
+        AssignalComponent
 
 
     ],

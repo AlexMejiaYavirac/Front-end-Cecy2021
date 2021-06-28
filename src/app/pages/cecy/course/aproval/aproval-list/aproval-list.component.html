@@ -18,6 +18,10 @@
                     <p-sortIcon field="name"></p-sortIcon>
                 </th>
                 <th pSortableColumn="status">
+                    Carrera
+                    <p-sortIcon field="status"></p-sortIcon>
+                </th>
+                <th pSortableColumn="status">
                     Estado
                     <p-sortIcon field="status"></p-sortIcon>
                 </th>
@@ -29,7 +33,12 @@
                 <td>
                     {{course.name}}
                 </td>
-
+                <td>
+                    {{course.career.name}}
+                </td>
+                <td>
+                    {{course.status.name}}
+                </td>
                 <td>
                     <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-warning"
                         (click)="openEditFormCourse(course)"></button>
