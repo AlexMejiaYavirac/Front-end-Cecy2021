@@ -32,10 +32,7 @@ import { CardModule } from 'primeng/card';
 import { SharedModule } from '../../shared/shared.module';
 import { RippleModule } from 'primeng/ripple';
 import { CourseComponent } from './course.component';
-import { AprovalComponent } from './aproval/aproval.component';
-import { AprovalFormComponent } from './aproval/aproval-form/aproval-form.component';
-import { AprovalListComponent } from './aproval/aproval-list/aproval-list.component';
-import { AssignalComponent } from './assignal/assignal.component';
+import { ApprovalComponent } from './approval/approval.component';
 
 
 
@@ -75,10 +72,7 @@ import { AssignalComponent } from './assignal/assignal.component';
     ],
     declarations: [
         CourseComponent,
-        AprovalComponent,
-        AprovalFormComponent,
-        AprovalListComponent,
-        AssignalComponent
+        ApprovalComponent
 
 
     ],

@@ -35,9 +35,9 @@ export class CecyHttpService {
          return this.httpClient.put(url, data, {params});
  }
 
-    // delete(url: string, ids, params = new HttpParams()) {
-    //     url = this.API_URL_JOB_BOARD + url;
-    //     return this.httpClient.put(url, {ids}, {params});
-    // }
+     delete(url: string) {
+         url = this.API_URL_CECY + url;
+        return this.httpClient.delete(url);
+    }
 
 }

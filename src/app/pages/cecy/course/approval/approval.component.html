@@ -1,0 +1,61 @@
+<!-- modal del formulario -->
+
+<p-dialog header="Asiganar aprobación" [contentStyle]="{minHeight: '300px'}" [(visible)]="display" [modal]="true"
+  [style]="{width: '50vw'}" [maximizable]="true" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+  <form [formGroup]="formApproval" (ngSubmit)="onSubmit($event)">
+    <!-- {{formPlanification.value|json}} -->
+
+    <div class="p-fluid">
+      <div class="p-field">
+        <label for="firstname1">Estado</label>
+        <p-dropdown [options]="status" placeholder="Selecciona un estado" formControlName="status" optionLabel="name"
+          ></p-dropdown>
+        <p *ngIf="formApproval.get('status').errors && formApproval.get('status').touched">
+          El campo debe estar lleno
+        </p>
+      </div>
+
+    </div>
+
+
+    <p-button icon="pi pi-check" (click)="updateCourse()" label="Ok" styleClass="p-button-text"></p-button>
+
+
+  </form>
+
+</p-dialog>
+
+<button pButton  routerLink="../planification" type="button" label="Ir a planificaciones" ></button>
+
+<div class="card">
+
+  <p-table [value]="courses" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Nombre del curso</th>
+        <th>Carrera</th>
+        <th>Estado</th>
+   
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-course>
+      <tr>
+        <td>{{course.name}}</td>
+        <td>{{course.career.name}}</td>
+        <td>{{course.status.name}}</td>
+      
+        <td>
+          <p-button type="button" icon="pi pi-check" (click)="getOneCourse(course.id)"
+            styleClass="p-button-text"></p-button>
+        </td>
+
+
+
+      </tr>
+    </ng-template>
+
+  </p-table>
+
+
+</div>

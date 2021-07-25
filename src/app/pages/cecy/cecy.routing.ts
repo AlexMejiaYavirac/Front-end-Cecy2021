@@ -11,6 +11,12 @@ export const CecyRouting: Routes = [
             loadChildren: () => import('./course/course.module').then(m => m.CourseModule),
             canActivate: [AuthGuard]
         },
+
+        {
+            path: 'planification',
+            loadChildren: () => import('./planification/planification.module').then(m => m.PlanificationModule),
+            canActivate: [AuthGuard]
+        },
       
     ]
 }

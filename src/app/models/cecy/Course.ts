@@ -4,5 +4,6 @@ import { Planification } from "./Planification";
 
 export interface Course {
     id?: number;
-    status: Status
+    status?: Status;
+    name: String
 }

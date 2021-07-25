@@ -1,0 +1,150 @@
+<!-- modal del formulario -->
+
+<p-dialog header="" [contentStyle]="{minHeight: '550px'}" [(visible)]="display" [modal]="true"
+    [style]="{width: '50vw'}" [maximizable]="true" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+    <form [formGroup]="formPlanification" (ngSubmit)="onSubmit($event)">
+        <!-- {{formPlanification.value|json}} -->
+
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="firstname1">Selecciona curso</label>
+                <p-dropdown [options]="courses" editable="true" placeholder="Selecciona un curso"
+                    formControlName="course" optionLabel="name" [showClear]="true"></p-dropdown>
+                    <p class="alert" *ngIf="formPlanification.get('course').errors && formPlanification.get('course').touched">
+                        El campo debe estar lleno
+                    </p>
+            </div>
+            
+            <div class="p-field p-col">
+                <label for="lastname1">Selecciona tutor </label>
+                <p-dropdown [options]="users" editable="true" placeholder="Selecciona un tutor" formControlName="user"
+                    optionLabel="full_name" [showClear]="true"></p-dropdown>
+
+                    <p class="alert" *ngIf="formPlanification.get('user').errors && formPlanification.get('user').touched">
+                        El campo debe estar lleno
+                    </p>
+            </div>
+
+
+        </div>
+
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="firstname1">Fecha de inicio</label>
+                <p-calendar [showIcon]="true"  formControlName="date_start"  inputId="icon"></p-calendar>
+                <p class="alert" *ngIf="formPlanification.get('date_start').errors && formPlanification.get('date_start').touched">
+                    El campo debe estar lleno
+                </p>
+            </div>
+            <div class="p-field p-col">
+                <label for="lastname2">Fecha de fin</label>
+                <p-calendar [showIcon]="true" formControlName="date_end" inputId="icon2"></p-calendar>
+
+                <p class="alert" *ngIf="formPlanification.get('date_end').errors && formPlanification.get('date_end').touched">
+                    El campo debe estar lleno
+                </p>
+            </div>
+
+            
+        </div>
+
+        <div class="p-fluid">
+            <div class="p-field">
+                <label for="firstname1">Estado</label>
+                <p-dropdown [options]="status" placeholder="Selecciona un estado" formControlName="status"
+                    optionLabel="name" [showClear]="true"></p-dropdown>
+                    <p class="alert" *ngIf="formPlanification.get('status').errors && formPlanification.get('status').touched">
+                        El campo debe estar lleno
+                    </p>
+            </div>
+            <div class="p-field">
+                <label for="lastname1">Nescesidades</label>
+                <p-button type="button" icon="pi pi-plus" (click)="addNeeds()" styleClass="p-button-text"></p-button>
+                <p class="alert" *ngIf="formPlanification.get('needs').errors && formPlanification.get('needs').touched">
+                    El campo debe estar lleno
+                </p>
+            </div>
+
+            <div class="p-field" formArrayName='needs'>
+
+                <div class="alert" *ngFor="let needs of needs.controls; let i=index">
+                    <input [formControlName]='i' pInputText>
+                    <p-button type="button" icon="pi pi-trash" (click)="lessNeeds(i)" styleClass="p-button-text">
+                    </p-button>
+
+                </div>
+
+            </div>
+        </div>
+      
+        <p class="alert" *ngIf="formPlanification.get('needs').errors && formPlanification.get('needs').touched">
+            El campo debe estar lleno
+        </p>
+
+      
+
+        <p-button *ngIf="formPlanification.valid" icon="pi pi-check" (click)="onSubmit()" label="Ok" styleClass="p-button-text"></p-button>
+      
+
+    </form>
+
+</p-dialog>
+
+
+<button pButton  routerLink="../course" type="button" label="Ir a aprobacion de cursos" ></button>
+
+<div class="card">
+
+    <p class="alertVacio" *ngIf="planifications.length === 0 ">
+        Aún no existen planificaciones, cuando crees una se reflejara aquí abajo!
+        </p>
+
+    <p-table [value]="planifications" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [rowsPerPageOptions]="[10,25,50]">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Nombre del curso</th>
+                <th>Tutor Responsable</th>
+                <th>Fecha de inicio</th>
+                <th>Fecha fin</th>
+                <th>Necesidades</th>
+
+
+
+
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-plani>
+            <tr>
+                <td>{{plani.course.name}}</td>
+                <td>{{plani.user.full_name}}</td>
+                <td>{{plani.date_start| date: 'dd/MM/yyyy'}}</td>
+                <td>{{plani.date_end |  date: 'dd/MM/yyyy'}}</td>
+                <td>{{plani.needs}}</td>
+
+
+
+                <td>
+                    <p-button type="button" icon="pi pi-pencil" (click)="getOnePlanificacion(plani.id)"
+                        styleClass="p-button-text"></p-button>
+                </td>
+
+                
+                <!-- <td>
+                    <p-button type="button" icon="pi pi-trash" (click)="deletePlanificacion(plani.id)"
+                        styleClass="p-button-text"></p-button>
+                </td>  -->
+
+
+
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="paginatorleft">
+            <p-button type="button" icon="pi pi-plus" (click)="showDialog()" styleClass="p-button-text"></p-button>
+        </ng-template>
+     
+    </p-table>
+
+  
+</div>

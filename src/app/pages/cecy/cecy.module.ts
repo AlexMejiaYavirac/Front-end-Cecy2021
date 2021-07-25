@@ -32,6 +32,7 @@ import {CardModule} from 'primeng/card';
 import {SharedModule} from '../shared/shared.module';
 import {CecyComponent} from './cecy.component';
 import {RippleModule} from 'primeng/ripple';
+import { PlanificationComponent } from './planification/planification.component';
 
 
 
@@ -70,6 +71,7 @@ import {RippleModule} from 'primeng/ripple';
   ],
   declarations: [
       CecyComponent,
+      
       
   ],
   exports: [],
